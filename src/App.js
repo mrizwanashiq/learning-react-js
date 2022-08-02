@@ -21,6 +21,7 @@ function App() {
     }).catch(err => {
       // If backend is not running, this will throw an error. So we need to handle it. 
       // I am adding book to the list, and it will be displayed in the UI.
+      book._id = (books.length + 1).toString();
       const tempBooks = [...books, book];
       setBooks(tempBooks);
     }).finally(() => {
@@ -29,6 +30,21 @@ function App() {
       e.target[1].value = '';
       e.target[2].value = '';
       e.target[3].value = '';
+    });
+  }
+
+  const deleteBook = async(id) => {
+    // This is to delete the book from the list.
+    axios.delete(`http://localhost:2022/book/${id}`).then(async res => {
+      // Once the book is deleted, we need to get the list of books
+      const bookList = await axios.get('http://localhost:2022/book');
+      // And render the list of books in the UI. I am reassigning the state with the new list of books
+      setBooks(bookList.data);
+    }).catch(err => {
+      // If backend is not running, this will throw an error. So we need to handle it.
+      // I am deleting the book from the list, and it will be removed from the UI.
+      const tempBooks = books.filter(book => book._id !== id);
+      setBooks(tempBooks);
     });
   }
 
@@ -47,6 +63,7 @@ function App() {
         // If backend is not running, this will throw an error. So we need to handle it.
         // I am adding book to the list, and it will be displayed in the UI.
         const book = {
+          _id: (books.length + 1).toString(),
           name: 'Default Book',
           author: 'Default Author',
           price: 0,
@@ -79,6 +96,7 @@ function App() {
             <th>Author Name</th>
             <th>Price</th>
             <th>Stock</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -88,6 +106,9 @@ function App() {
               <td>{book.author}</td>
               <td>{book.price}</td>
               <td>{book.stock}</td>
+              <td>
+                <button onClick={() => deleteBook(book._id)}>Delete</button>
+              </td>
             </tr>
           ))}
         </tbody>
