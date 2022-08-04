@@ -32,7 +32,7 @@ function App() {
         // I am adding book to the list, and it will be displayed in the UI.
         setBooks([book]);
       });
-  }, []);
+  });
 
   const onSubmit = async (e) => {
     // e.preventDefault prevents page from refreshing when form is submitted (default behavior)
@@ -87,8 +87,8 @@ function App() {
       <form onSubmit={onSubmit}>
         <input type="text" name="bookName" placeholder='Name' />
         <input type="text" name="authorName" placeholder='Author' />
-        <input type="text" name="price" placeholder='Price'/>
-        <input type="text" name="stock" placeholder='Stock'/>
+        <input type="text" name="price" placeholder='Price' />
+        <input type="text" name="stock" placeholder='Stock' />
         <button type="submit">Save</button>
       </form>
 
