@@ -89,40 +89,38 @@ function App() {
   }
 
   const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-  },
-  {
-    title: 'Author',
-    dataIndex: 'author',
-    key: 'author',
-  },
-  {
-    title: 'Price',
-    dataIndex: 'price',
-    key: 'price',
-  },
-  {
-    title: 'Stock',
-    dataIndex: 'stock',
-    key: 'stock',
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    render: (text, record) => (
-      <AntDButton color='primary' onClick={() => deleteBook(record._id)}>Delete</AntDButton>
-    ),
-  }];
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name',
+    },
+    {
+      title: 'Author',
+      dataIndex: 'author',
+      key: 'author',
+    },
+    {
+      title: 'Price',
+      dataIndex: 'price',
+      key: 'price',
+    },
+    {
+      title: 'Stock',
+      dataIndex: 'stock',
+      key: 'stock',
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (text, record) => (
+        <AntDButton color='primary' onClick={() => deleteBook(record._id)}>Delete</AntDButton>
+      ),
+    }];
 
   const customStyle = { margin: "5px", marginTop: "10px", marginBottom: "10px", width: "100%", height: "50px", borderRadius: "5px", fontSize: "16px" }
 
   return (
     <div className="App">
-      <h1>Book Store</h1>
-
       <AppBar>
         <Toolbar>
           <Typography variant="h6" color="inherit">
@@ -130,7 +128,7 @@ function App() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <div style={{marginTop: '30px'}}/>
+      <div style={{ marginTop: '90px' }} />
 
       <Typography variant="h5" color="primary">Add Book</Typography>
       <form onSubmit={onSubmit}>
