@@ -2,46 +2,10 @@
   text-align: center;
 }
 
-table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-td {
-  text-align: left;
-  padding: 8px;
-}
-
-th {
-  text-align: left;
-  padding: 8px;
-}
-
-h1 {
-  color: #61dafb;
-}
-
-h2 {
-  color: #61dafb;
-  background-color: #282c34;
-}
 
 form {
-  border: 3px solid #61dafb;
-  width: 50%;
-  margin: auto;
-  padding: 10px;
-}
-
-input[type=text] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
+  border: 3px solid #b8b8b8;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 5px;
 }

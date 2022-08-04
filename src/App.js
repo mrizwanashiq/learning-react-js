@@ -1,6 +1,15 @@
 import './App.css';
 import axios from 'axios';
 import React from 'react';
+import {
+  Typography,
+  AppBar,
+  Toolbar,
+  TextField,
+  Button as MuiButton,
+} from "@material-ui/core";
+import 'antd/dist/antd.css';
+import { Table, Button as AntDButton } from 'antd';
 
 function App() {
 
@@ -32,17 +41,17 @@ function App() {
         // I am adding book to the list, and it will be displayed in the UI.
         setBooks([book]);
       });
-  }, []);
+  });
 
   const onSubmit = async (e) => {
     // e.preventDefault prevents page from refreshing when form is submitted (default behavior)
     e.preventDefault();
     // This is body of the request, we can send it as a json object
     const book = {
-      name: e.target[0].value,
-      author: e.target[1].value,
-      price: parseInt(e.target[2].value),
-      stock: parseInt(e.target[3].value)
+      name: e.target.name.value,
+      author: e.target.author.value,
+      price: parseInt(e.target.price.value),
+      stock: parseInt(e.target.stock.value)
     }
     axios.post('http://localhost:2022/book', book).then(async res => {
       // Once the book is added, we need to get the list of books
@@ -57,10 +66,10 @@ function App() {
       setBooks(tempBooks);
     }).finally(() => {
       // This is to clear the form after submitting.
-      e.target[0].value = '';
-      e.target[1].value = '';
-      e.target[2].value = '';
-      e.target[3].value = '';
+      e.target.name.value = '';
+      e.target.author.value = '';
+      e.target.price.value = '';
+      e.target.stock.value = '';
     });
   }
 
@@ -79,44 +88,93 @@ function App() {
     });
   }
 
+  const columns = [
+  {
+    title: 'Name',
+    dataIndex: 'name',
+    key: 'name',
+  },
+  {
+    title: 'Author',
+    dataIndex: 'author',
+    key: 'author',
+  },
+  {
+    title: 'Price',
+    dataIndex: 'price',
+    key: 'price',
+  },
+  {
+    title: 'Stock',
+    dataIndex: 'stock',
+    key: 'stock',
+  },
+  {
+    title: 'Action',
+    key: 'action',
+    render: (text, record) => (
+      <AntDButton color='primary' onClick={() => deleteBook(record._id)}>Delete</AntDButton>
+    ),
+  }];
+
+  const customStyle = { margin: "5px", marginTop: "10px", marginBottom: "10px", width: "100%", height: "50px", borderRadius: "5px", fontSize: "16px" }
+
   return (
     <div className="App">
       <h1>Book Store</h1>
 
-      <h2>Add Book</h2>
+      <AppBar>
+        <Toolbar>
+          <Typography variant="h6" color="inherit">
+            Book Store
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <div style={{marginTop: '30px'}}/>
+
+      <Typography variant="h5" color="primary">Add Book</Typography>
       <form onSubmit={onSubmit}>
-        <input type="text" name="bookName" placeholder='Name' />
-        <input type="text" name="authorName" placeholder='Author' />
-        <input type="text" name="price" placeholder='Price'/>
-        <input type="text" name="stock" placeholder='Stock'/>
-        <button type="submit">Save</button>
+        <TextField
+          style={customStyle}
+          type="text"
+          label="Name"
+          variant="outlined"
+          name="name"
+          required
+        />
+        <TextField
+          style={customStyle}
+          type="text"
+          label="Author"
+          variant="outlined"
+          name="author"
+          required
+        />
+        <TextField
+          style={customStyle}
+          type="number"
+          inputProps={{ min: 0 }}
+          label="Price"
+          variant="outlined"
+          name="price"
+          required
+        />
+        <TextField
+          style={customStyle}
+          type="number"
+          inputProps={{ min: 0 }}
+          label="Stock"
+          variant="outlined"
+          name="stock"
+          required
+        />
+        <MuiButton style={customStyle} variant="contained" color="primary" type='submit'>
+          save
+        </MuiButton>
       </form>
 
-      <h2>Books</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Book Name</th>
-            <th>Author Name</th>
-            <th>Price</th>
-            <th>Stock</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {books.map(book => (
-            <tr>
-              <td>{book.name}</td>
-              <td>{book.author}</td>
-              <td>{book.price}</td>
-              <td>{book.stock}</td>
-              <td>
-                <button onClick={() => deleteBook(book._id)}>Delete</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <Typography variant="h5" color="primary">Books</Typography>
+      <Table columns={columns} dataSource={books} />
     </div>
   );
 }
