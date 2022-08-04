@@ -29,7 +29,7 @@ const Login =() => {
     const userExists = users.find(user => user.username === e.target.username.value && user.password === e.target.password.value);
     if (userExists) {
         // if user exists, set token in localStorage
-        localStorage.setItem('token', userExists.name);
+        localStorage.setItem('token', JSON.stringify(userExists));
         // redirect to home page
         navigate('/');
     } else {

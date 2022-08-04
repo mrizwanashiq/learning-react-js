@@ -89,7 +89,6 @@ const Register =() => {
           Register
         </Button>
       </form>
-      {/* Link to navigate to login */}
       <Typography variant="h6" color="primary">Already have an account?</Typography>
       <Typography variant="h5" color="primary">
         <Link to="/login">Login</Link>

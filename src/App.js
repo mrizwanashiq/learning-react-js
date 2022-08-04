@@ -6,7 +6,7 @@ import Home from './pages/home';
 import React from "react";
 
 function App() {
-// We will add routes for login and home page
+  // We will add routes for login and home page
   React.useEffect(() => {
     if (!localStorage.getItem('users')) {
       localStorage.setItem('users', JSON.stringify([]));
