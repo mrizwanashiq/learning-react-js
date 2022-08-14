@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { incrementByAmount } from '../redux/app'
 
-export default function IncreaseByAmount() {
+export default function ChangesByAmount() {
   const dispatch = useDispatch()
 
   const handleClick = (event) => {
@@ -13,8 +13,8 @@ export default function IncreaseByAmount() {
 
   return (
     <form onSubmit={handleClick}>
-      <input type='number' name='number' placeholder='Increase by Amount'/>
-      <button type='submit'>Increase by amount</button>
+      <input type='number' name='number' placeholder='Change by Amount'/>
+      <button type='submit'>Change by amount</button>
     </form>
   )
 }
