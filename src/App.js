@@ -32,17 +32,17 @@ function App() {
         // I am adding book to the list, and it will be displayed in the UI.
         setBooks([book]);
       });
-  });
+  }, []);
 
   const onSubmit = async (e) => {
     // e.preventDefault prevents page from refreshing when form is submitted (default behavior)
     e.preventDefault();
     // This is body of the request, we can send it as a json object
     const book = {
-      name: e.target[0].value,
-      author: e.target[1].value,
-      price: parseInt(e.target[2].value),
-      stock: parseInt(e.target[3].value)
+      name: e.target.name.value,
+      author: e.target.author.value,
+      price: parseInt(e.target.price.value),
+      stock: parseInt(e.target.stock.value)
     }
     axios.post('http://localhost:2022/book', book).then(async res => {
       // Once the book is added, we need to get the list of books
@@ -57,10 +57,10 @@ function App() {
       setBooks(tempBooks);
     }).finally(() => {
       // This is to clear the form after submitting.
-      e.target[0].value = '';
-      e.target[1].value = '';
-      e.target[2].value = '';
-      e.target[3].value = '';
+      e.target.name.value = '';
+      e.target.author.value = '';
+      e.target.price.value = '';
+      e.target.stock.value = '';
     });
   }
 
@@ -85,10 +85,10 @@ function App() {
 
       <h2>Add Book</h2>
       <form onSubmit={onSubmit}>
-        <input type="text" name="bookName" placeholder='Name' />
-        <input type="text" name="authorName" placeholder='Author' />
-        <input type="text" name="price" placeholder='Price' />
-        <input type="text" name="stock" placeholder='Stock' />
+        <input type="text" name="name" placeholder='Name' />
+        <input type="text" name="author" placeholder='Author' />
+        <input type="number" name="price" placeholder='Price' />
+        <input type="number" name="stock" placeholder='Stock' />
         <button type="submit">Save</button>
       </form>
 
