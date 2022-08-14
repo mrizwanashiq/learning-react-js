@@ -41,7 +41,7 @@ function App() {
         // I am adding book to the list, and it will be displayed in the UI.
         setBooks([book]);
       });
-  });
+  }, []);
 
   const onSubmit = async (e) => {
     // e.preventDefault prevents page from refreshing when form is submitted (default behavior)
