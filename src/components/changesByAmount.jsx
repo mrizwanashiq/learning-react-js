@@ -7,7 +7,11 @@ export default function ChangesByAmount() {
 
   const handleClick = (event) => {
     event.preventDefault();
-    dispatch(incrementByAmount(parseInt(event.target.number.value)))
+    // checking if the input is a number
+    const amount = parseInt(event.target.number.value)
+    if (!isNaN(amount)) {
+      dispatch(incrementByAmount(amount))
+    }
     event.target.number.value = ''
   }
 
