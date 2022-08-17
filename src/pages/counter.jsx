@@ -3,16 +3,22 @@ import CounterText from '../components/counterText'
 import DecrementButton from '../components/decrementButton'
 import IncrementButton from '../components/incrementButton'
 import ChangesByAmount from '../components/changesByAmount'
+import { useSelector, useDispatch } from 'react-redux'
+import { changeValue } from '../redux/app'
 
 export default function Counter() {
-  const [count, setCount] = React.useState(0)
+  const dispatch = useDispatch()
+  const value = useSelector(state => state.value)
+  // const [count, setCount] = React.useState(0)
 
   const handleDecClick = () => {
-    setCount(count - 1)
+    // setCount(count - 1)
+    dispatch(changeValue(-1))
   }
 
   const handleIncClick = () => {
-    setCount(count + 1)
+    // setCount(count + 1)
+    dispatch(changeValue(1))
   }
 
   const handleAmountClick = (event) => {
@@ -20,7 +26,8 @@ export default function Counter() {
     // checking if the input is a number
     const amount = parseInt(event.target.number.value)
     if (!isNaN(amount)) {
-      setCount(count + amount)
+      // setCount(count + amount)
+      dispatch(changeValue(amount))
     }
     event.target.number.value = ''
   }
@@ -28,7 +35,7 @@ export default function Counter() {
   return (
     <div>
       <DecrementButton handleClick={handleDecClick} />
-      <CounterText count={count}  />
+      <CounterText count={value}  />
       <IncrementButton handleClick={handleIncClick} />
       <ChangesByAmount handleClick={handleAmountClick} />
     </div>
