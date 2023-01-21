@@ -1,5 +1,3 @@
-export default function IncrementButton({handleClick}) {
-  return (
-    <button onClick={handleClick}>+</button>
-  )
+export default function IncrementButton({ handleClick }) {
+	return <button onClick={handleClick}>+</button>;
 }
